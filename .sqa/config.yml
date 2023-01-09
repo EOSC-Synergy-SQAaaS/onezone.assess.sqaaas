@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/indigo-dc/onezone:
+      branch: master
+      repo: https://github.com/indigo-dc/onezone
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/indigo-dc/onezone git:
+        commands:
+        - /usr/bin/env sh .sqa/script.gimpy-alizarin-penguin.sh
+        container: qc.acc_freaky-cream-hound
+  QC.Doc:
+    repos:
+      github.com/indigo-dc/onezone find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.beady-teal-tang.sh
+        container: qc.doc_queasy-firebrick-dachshund
+      github.com/indigo-dc/onezone git:
+        commands:
+        - /usr/bin/env sh .sqa/script.randy-ecru-blue.sh
+        container: qc.doc_queasy-chocolate-caterpillar
+      github.com/indigo-dc/onezone markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-viridian-insect.sh
+        container: qc.doc_wiggy-heliotrope-gopher
+  QC.Lic:
+    repos:
+      github.com/indigo-dc/onezone licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.skinny-grey-bongo.sh
+        container: qc.lic_greasy-razzmatazz-dragonfly
+  QC.Sec:
+    repos:
+      github.com/indigo-dc/onezone bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.ugly-buff-collie.sh
+        container: qc.sec_skinny-russet-donkey
+  QC.Sty:
+    repos:
+      github.com/indigo-dc/onezone flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-scarlet-quetzal.sh
+        container: qc.sty_scaly-aqua-wolfhound
+      github.com/indigo-dc/onezone hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.snoopy-silver-tarantula.sh
+        container: qc.sty_scanty-sepia-elephant
+  QC.Ver:
+    repos:
+      github.com/indigo-dc/onezone get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-sapphire-beagle.sh
+        container: qc.ver_snippy-apricot-lobster
+timeout: 5400
